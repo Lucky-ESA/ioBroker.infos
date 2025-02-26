@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/chartist.min.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/simplemde.min.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/info.css"/>
+
+        <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+        <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
+        <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
+
+        <script type="text/javascript" src="../../lib/js/materialize.js"></script>
+
+        <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+
+        <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/js/bootbox.min.js"></script>
+        <script type="text/javascript" src="lib/js/showdown.min.js"></script>
+        <script type="text/javascript" src="lib/js/feednami.min.js"></script>
+        <script type="text/javascript" src="lib/js/chartist.min.js"></script>
+        <script type="text/javascript" src="lib/js/simplemde.min.js"></script>
+        <script type="text/javascript" src="lib/js/format-google-calender.js"></script>
+
+        <script type="text/javascript" src="../../lib/js/translate.js"></script>
+        <script type="text/javascript" src="../../lib/js/selectID.js"></script>
+        <script type="text/javascript" src="../../lib/js/loStorage.js"></script>
+
+        <script type="text/javascript" src="words.js"></script>
+        <script type="text/javascript" src="lib/js/commons.js"></script>
+        <script>
+            window.socket = io.connect();
+        </script>
+        <script type="text/javascript" src="lib/js/helper.js"></script>
+        <script type="text/javascript" src="lib/js/hostInfo.js"></script>
+        <script type="text/javascript" src="lib/js/updateAdapter.js"></script>
+        <script type="text/javascript" src="lib/js/searchGithub.js"></script>
+        <script type="text/javascript" src="lib/js/forum.js"></script>
+        <script type="text/javascript" src="lib/js/news.js"></script>
+        <script type="text/javascript" src="lib/js/clock.js"></script>
+        <script type="text/javascript" src="lib/js/githubData.js"></script>
+        <script type="text/javascript" src="lib/js/adapterIssues.js"></script>
+        <script type="text/javascript" src="lib/js/adapterRequests.js"></script>
+        <script type="text/javascript" src="lib/js/popupnews.js"></script>
+        <script type="text/javascript" src="lib/js/documentation.js"></script>
+        <script type="text/javascript" src="lib/js/systemInformation.js"></script>
+        <script type="text/javascript" src="lib/js/info.js"></script>
+
+    </head>
+    <body>
+        <div class="m adapter-container load" id="homeTemplateLoad">
+            <div class="row">
+                <div class="col s12">
+                    <div class="progress" style="color: blue;">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m adapter-container loadFinish" style="display: none;" id="homeTemplate">
+
+            <div id="main-wrapper" class="col-xs-12 col-md-12">
+
+                <div id="main">
+
+                    <div class="pull-right rotate-button">
+                        <button class="documentationButton btn btn-primary translate">documentation</button>
+                    </div>
+
+                    <div class="page-title">
+                        <div class="title_left">
+
+                        </div>
+                        <div class="title_right">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div id="home-container">
+
+                        <div class="row justify-content-start">
+
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 clock">
+                                <div class="tile-stats">
+                                    <ul id="cssClock">
+                                        <li id="cssSec"></li>
+                                        <li id="cssHour"></li>
+                                        <li id="cssMin"></li>
+                                    </ul>
+                                    <h3 class="specialclock" id="weekday_now">-</h3>
+                                    <div class="count specialclock col-lg-8 col-md-3 col-sm-6 col-xs-6" id="date_now">-</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-5 popandgit">
+                                <div class="row">
+                                    <div class="col-xs-12 text-center hidden" id="githubbuttonslist">
+                                        <button type="button" data-href="" class="btn btn-default" id="myIssuesListOnGithub">
+                                            <i class="fa fa-list fa-lg"></i> <span class="translate">My issues list</span>
+                                        </button>
+                                        <button type="button" data-href="" class="btn btn-default" id="myWatchedListOnGithub">
+                                            <i class="fa fa-eye fa-lg"></i> <span class="translate">Watched repositories</span>
+                                        </button>
+                                        <button type="button" data-href="" class="btn btn-default" id="myStarredListOnGithub">
+                                            <i class="fa fa-star fa-lg"></i> <span class="translate">Starred repositories</span>
+                                        </button>
+                                        <button type="button" data-href="" class="btn btn-default" id="myAssignedListOnGithub">
+                                            <i class="fa fa-th-list fa-lg"></i> <span class="translate">Issues assigned to me</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12" id="popupnews"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-11 col-xs-11 events">
+                                <ul class="list-unstyled timeline" id="events-upcoming"></ul>
+                                <ul class="list-unstyled timeline" id="events-past"></ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div id="homeUpdateListTab" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2><span class="translate">Updates</span></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content height_320">
+                                	<!--
+                                    <div class="adjust" id="updateHomeListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <div class="">
+                                        <ul id="updateHomeList"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="homeNewAdapterTab" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2><span class="translate">New adapters</span></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div id="homeNewAdapterDiv" class="x_content y_content height_150">
+                                	<!--
+                                    <div class="adjust" id="newHomeListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <div class="">
+                                        <ul id="newHomeList"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="hostUpdateHomeListRow">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="x_panel block_content">
+                                        <div class="x_content y_content vertical-align height_143">
+                                            <div id="hostUpdateHomeList" class=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="systemInfoTab" class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2><span class="translate">System informations</span></h2>
+                                    <ul class="nav navbar-nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a id="show-system-details" class="translateT" title="Show details"><i class="fa fa-search"></i></a>
+                                        </li>
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content height_320">
+                                	<!--
+                                    <div class="adjust" id="systemInfoListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <div id="systemInfoList"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="adapterRequestIssueBlock">
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" id="adapterRequestBlock">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2 id="adapterRequestBlockTitle"><span class="translate">Adapter Requests</span>&nbsp;</h2>
+                                    <ul class="nav navbar-nav navbar-right panel_toolbox">
+                                        <li id="new-adapter-request-li" class="disabled">
+                                            <a id="new-adapter-request" class="disabled"><i class="fa fa-plus"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://github.com/ioBroker/AdapterRequests" target="_blank"><i class="fa fa-globe"></i></a>
+                                        </li>
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content height_520">
+                                	<!--
+                                    <div class="adjust" id="adapterRequestListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <ul class="list-unstyled timeline" id="adapterRequestList"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" id="knownIssuesBlock">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2><span class="translate">Issues &amp; bugs</span></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content height_520">
+                                	<!--
+                                    <div class="adjust" id="adapterIssueListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <ul class="list-unstyled timeline" id="adapterIssueList"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" id="adapterSearchBlock">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2><span class="translate">ioBroker Adapters on Github</span></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content height_520">
+                                	<!--
+                                    <div class="adjust" id="githubSearchListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <ol class="list-unstyled timeline" id="githubSearchList"></ol>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" id="newsBlock">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2 id="newsTitle">ioBroker News</h2>
+                                    <ul class="nav navbar-nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a id="news-link" target="_blank"><i class="fa fa-globe"></i></a>
+                                        </li>
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content">
+                                	<!--
+                                    <div class="adjust" id="newsListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <ul class="list-unstyled timeline" id="newsList"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" id="forumBlock">
+                            <div class="x_panel block_content">
+                                <div class="x_title">
+                                    <h2 id="forumTitle">ioBroker Forum <small id="forumTime"></small></h2>
+                                    <ul class="nav navbar-nav navbar-right panel_toolbox">
+                                        <li>
+                                            <a id="forum-link" target="_blank"><i class="fa fa-globe"></i></a>
+                                        </li>
+                                        <li>
+                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content y_content">
+                                	<!--
+                                    <div class="adjust" id="forumListLoader">
+                                        <div class="loader3"></div>
+                                    </div>
+                                    -->
+                                    <ul class="list-unstyled timeline" id="forumList"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="sidebar-wrapper" class="col-md-3 col-xs-12 pull-right">
+                <div id="sidebar">
+
+                    <div class="docButton hidden-md hidden-lg">
+                        <button class="documentationButton btn btn-primary translate">back</button>
+                    </div>
+
+                    <p class="h4 alert alert-info">
+                        <span class="translate">No guarantee can be given for the correctness and completeness of external links.</span>
+                        <br/><br/>
+                        <span class="translate">If links are missing or wrong, please send us an e-mail to</span>:&nbsp;
+                        <a href="mailto:iobroker@lmdsoft.de?subject=Info-Dokumentation" class="translate">Adapter care team</a>
+                    </p>
+
+                    <div class="x_panel block_content" id="doc_community_parent">
+                        <div class="x_title">
+                            <h2 class="translate">Community</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_community"></ul>
+                        </div>
+                    </div>
+
+                    <div class="x_panel block_content" id="doc_documentation_parent">
+                        <div class="x_title">
+                            <h2 class="translate">Documentation</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_documentation"></ul>
+                        </div>
+                    </div>
+
+                    <div class="x_panel block_content" id="doc_news_parent">
+                        <div class="x_title">
+                            <h2 class="translate">News</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_news"></ul>
+                        </div>
+                    </div>
+
+                    <div class="x_panel block_content" id="doc_blog_parent">
+                        <div class="x_title">
+                            <h2 class="translate">Blog</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_blog"></ul>
+                        </div>
+                    </div>
+
+                    <div class="x_panel block_content" id="doc_video_parent">
+                        <div class="x_title">
+                            <h2 class="translate">Video Playlist</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_video"></ul>
+                        </div>
+                    </div>
+
+                    <div class="x_panel block_content" id="doc_development_parent">
+                        <div class="x_title">
+                            <h2 class="translate">Development</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_development"></ul>
+                        </div>
+                    </div>
+
+                    <div class="x_panel block_content" id="doc_other_parent">
+                        <div class="x_title">
+                            <h2 class="translate">Other</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content y_content">
+                            <ul class="list-unstyled timeline" id="doc_other"></ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Forum Entry -->
+        <ul id="forumEntryTemplate" class="hidden">
+            <li>
+                <div class="block">
+                    <div class="block_content">
+                        <div class="y_title">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
+                                </li>
+                            </ul>
+                            <h2 class="title">
+                                <a target="_blank" class="titleLink"></a>
+                            </h2>
+                        </div>
+                        <div class="y_content">
+                            <div>
+                                <div class="tags hidden-xs">
+                                    <a href="" target="_blank" class="tag label label-success">
+                                        <span class="forumClass"></span>
+                                    </a>
+                                </div>
+                                <div class="byline"></div>
+                            </div>
+                            <div class="assignDiv">
+                                <h3>
+                                    <span class="label label-primary">
+                                        <img src="" class="img-circle assigner_img"/>
+                                        <span class="assigner"></span>
+                                    </span>
+                                </h3>
+                            </div>
+                            <br/>
+                            <p class="description"></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- / Forum Entry -->
+
+        <div id="tagTemplate" class="hidden">
+            <a href="" target="_blank" class="tag label">
+                <span class="forumClass"></span>
+            </a>
+        </div>
+
+        <!-- Comments -->
+        <div id="commentsTemplate" class="hidden">
+            <div class="spoiler-content">
+                <div class="byline"></div>
+                <p class="description"></p>
+            </div>
+        </div>
+        <!-- / Comments -->
+
+        <!-- UpdateList -->
+        <ul id="updateHomeListTemplate" class="hidden">
+            <li>
+                <p>
+                    <a class="btn btn-default adapter-update-submit"><i class="fa fa-refresh"></i></a>&nbsp;
+                    <span class="title">fronius adapter</span>&nbsp;
+                    <span class="version">0.0.6</span>&nbsp;
+                    <i class="fa fa-arrow-right"></i>&nbsp;
+                    <strong class="newVersion">0.1.0</strong>&nbsp;
+                    <a href="javascript:;" class="adapter-readme-submit show-md">
+                        <i class="fa fa-file-text text-info"></i>
+                    </a>
+                    <a class="notesVersion" title="infos">
+                        <i class="fa fa-info-circle text-info"></i>
+                    </a>
+                </p>
+            </li>
+        </ul>
+        <!-- / UpdateList -->
+
+        <!-- NewList -->
+        <ul id="newHomeListTemplate" class="hidden">
+            <li>
+                <p>
+                    <a class="btn btn-default adapter-install-submit"><i class="fa fa-plus"></i></a>&nbsp;
+                    <span class="title">fronius adapter</span>&nbsp;
+                    <span class="version">0.0.6</span>&nbsp;
+                    <a href="javascript:;" class="adapter-readme-submit show-md">
+                        <i class="fa fa-file-text text-info"></i>
+                    </a>
+                </p>
+            </li>
+        </ul>
+        <!-- / NewList -->
+
+        <!-- Popup News -->
+        <div id="popupNewsTemplate" class="hidden">
+            <div>
+                <div class="alert alert-info alert-dismissible row" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="col-xs-2"><i class="fa fa-exclamation-triangle fa-5x"></i></div>
+                    <div class="col-xs-10 col-sm-9 col-sm-offset-1 col-md-offset-0">
+                        <h2 class="no-margin popupnews_title"></h2>
+                        <p class="popupnews_content"></p>
+                    </div>
+                    <button type="button" data-id="" data-dismiss="alert" class="btn btn-info popupnewsneveragain translate">Never show this message again</button>
+                </div>
+            </div>
+        </div>
+        <!-- / Popup News -->
+
+        <!-- HostUpdateList -->
+        <div id="hostUpdateHomeListTemplate" class="hidden">
+            <p class="text-center">
+                <a href="#" class="title host-update">Your host is outdated!</a>&nbsp;
+                <span class="version">0.0.6</span>&nbsp;
+                <i class="fa fa-arrow-up"></i>&nbsp;
+                <strong class="newVersion">0.1.0</strong>&nbsp;
+                <a href="javascript:;" class="host-readme-submit show-md">
+                    <i class="fa fa-file-text text-info"></i>
+                </a>
+                <a class="notesVersion" title="infos">
+                    <i class="fa fa-info-circle text-info"></i>
+                </a>
+            </p>
+        </div>
+        <!-- / HostUpdateList -->
+
+        <!-- Install/Update -->
+        <div id="modal-command" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-command" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="fa fa-window-minimize"></i>
+                        </button>
+                        <h4 class="modal-title" id="modal-command-label">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="adapter-meter" class="meter">
+                            <span style="width: 1%;"></span>
+                        </div>
+                        <p id="adapter-install-message-on-end">&nbsp;</p>
+                        <a data-toggle="collapse" href="#collapseApadpterInstallDetails" aria-expanded="false" aria-controls="collapseApadpterInstallDetails">
+                            <span data-i18n="details">Details</span> ...
+                        </a>
+                        <div class="collapse" id="collapseApadpterInstallDetails">
+                            <textarea class="command" id="stdout" disabled="disabled" cols="120" rows="30"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-left" data-toggle="buttons">
+                            <label class="btn btn-default active">
+                                <input type="radio" name="options" id="adapter-install-close-after" checked> <span class="translate">Close after install</span>
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="options" id="adapter-install-dont-close-after"> <span class="translate">Don't close after install</span>
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-default translate" id="adapter-install-close-btn" data-dismiss="modal">Run on background</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Install/Update -->
+
+        <!-- Create GitHub Issue -->
+        <div id="modal-github" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-github" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="fa fa-close"></i>
+                        </button>
+                        <h4 class="modal-title translate">Create new issue on GitHub</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="githubChooseButtons" class="text-center">
+                            <button type="button" id="addRequestBtn" class="btn btn-primary">
+                                <i class="fa fa-magic fa-lg"></i> <span class="translate">Add feature request</span>
+                            </button>
+                            <button type="button" id="addBugBtn" class="btn btn-danger">
+                                <i class="fa fa-bug fa-lg"></i> <span class="translate">Add bug report</span>
+                            </button>
+                        </div>
+                        <div id="githubIssueCreator" class="hidden">
+                            <div class="h4 alert alert-danger hidden"  role="alert">
+                                <ul id="githubErrorList"></ul>
+                            </div>
+                            <div class="h4 alert alert-info" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <span class="translate">Ideally, inquiries should be made in English because some developers come from abroad and are not proficient in the local language.</span>
+                            </div>
+                            <form>
+                                <input type="hidden" id="isBug" value="false"/>
+                                <input type="hidden" id="adapterVersionForBug" value=""/>
+                                <input type="hidden" id="issueLinkForGithubApi" value=""/>
+                                <h4 class="text-center">
+                                    <span class="label label-primary hidden" id="adapterNameForGithub"></span>
+                                </h4>
+                                <div class="form-group">
+                                    <label for="githubTitle" class="translate">Title</label>
+                                    <input type="text" class="form-control" id="githubTitle">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="githubContent" rows="10"></textarea>
+                                </div>
+                            </form>
+                            <figure id="githubSystemInformationForRequestFigure" class="hidden">
+                                <h4 class="translate">To better investigate the problem, the following data will be provided to the developer.</h4>
+                                <p id="githubSystemInformationForRequest"></p>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-left">
+                            <button type="button" data-href="" class="btn btn-default disabled" id="openIssueOnGihub">
+                                <i class="fa fa-github fa-lg"></i> <span class="translate">Open on GitHub</span>
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-success disabled" id="submitGithubIssue">
+                            <i class="fa fa-check fa-lg"></i> <span class="translate">Submit new issue</span>
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <i class="fa fa-close fa-lg"></i> <span class="translate" id="githubCloseButtonText">Cancel</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Create GitHub Issue -->
+
+        <!-- Create GitHub List -->
+        <div id="modal-githublist" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-githublist" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="fa fa-close"></i>
+                        </button>
+                        <h4 class="modal-title" id="modal-githublist-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="x_content y_content height_520">
+                        	<!--
+                            <div class="adjust" id="githublistLoader">
+                                <div class="loader3"></div>
+                            </div>
+                            -->
+                            <ul class="list-unstyled timeline" id="githublistbody"></ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <i class="fa fa-close fa-lg"></i> <span class="translate">Close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Create GitHub List -->
+
+        <!-- Systemdetails -->
+        <div id="modal-system" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-system" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="fa fa-close"></i>
+                        </button>
+                        <h4 class="modal-title translate">System informations</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" class="translate" href="#sys_info_tab_system">System</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_os">Software</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_cpu">CPU</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_memory">Memory</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_graphics">Graphics</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_network">Network</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_wifi">Wifi</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_docker">Docker</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_disks">Disks</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_usb">USB</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_bluetooth">Bluetooth</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_battery">Battery</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_audio">Audio</a></li>
+                            <li><a data-toggle="tab" class="translate" href="#sys_info_tab_printer">Printer</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <!-- SYSTEM -->
+                            <div id="sys_info_tab_system" class="tab-pane fade in active">
+                                <h3 class="translate">System</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Baseboard</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_system_baseboard"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Bios</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_system_bios"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Chassis</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_system_chassis"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Hardware</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_system_hardware"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">UUIDs</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_system_uuid"></dl>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- SOFTWARE -->
+                            <div id="sys_info_tab_os" class="tab-pane fade">
+                                <h3 class="translate">Software</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">OS Informations</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-8">
+                                                <dl class="dl-horizontal dl-lg" id="sys_info_os_info"></dl>
+                                            </div>
+                                            <div class="hidden-xs col-sm-4">
+                                                <img src="" id="sys_info_os_img_logo" class="img-responsive"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Software versions</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_os_versions"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Users online</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_os_users">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="translate">os.user</th>
+                                                            <th class="translate">os.tty</th>
+                                                            <th class="translate">os.date</th>
+                                                            <th class="translate">os.time</th>
+                                                            <th class="translate">os.ip</th>
+                                                            <th class="translate">os.command</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="info_0_sysinfo_os_users_datas"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Running processes</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_os_processes">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <dl class="dl-horizontal dl-lg">
+                                                        <dt class="translate">os.all</dt>
+                                                        <dd id="info_0_sysinfo_os_processes_all_data"></dd>
+                                                        <dt class="translate">os.sleeping</dt>
+                                                        <dd id="info_0_sysinfo_os_processes_sleeping_data"></dd>
+                                                        <dt class="translate">os.unknown</dt>
+                                                        <dd id="info_0_sysinfo_os_processes_unknown_data"></dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <dl class="dl-horizontal dl-lg">
+                                                        <dt class="translate">os.running</dt>
+                                                        <dd id="info_0_sysinfo_os_processes_running_data"></dd>
+                                                        <dt class="translate">os.blocked</dt>
+                                                        <dd id="info_0_sysinfo_os_processes_blocked_data"></dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="translate">os.name</th>
+                                                            <th class="translate">os.cpu</th>
+                                                            <th class="translate">os.mem</th>
+                                                            <th class="translate">os.priority</th>
+                                                            <th class="translate">os.memVsz</th>
+                                                            <th class="translate">os.memRss</th>
+                                                            <th class="translate">os.started</th>
+                                                            <th class="translate">os.state</th>
+                                                            <th class="translate">os.user</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="info_0_sysinfo_os_processes_list_datas"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- CPU -->
+                            <div id="sys_info_tab_cpu" class="tab-pane fade">
+                                <h3 class="translate">CPU</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">CPU information</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_cpu_info"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">CPU-Load</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <dl class="dl-horizontal dl-lg" id="sys_info_cpu_currentLoad"></dl>
+                                            </div>
+                                            <div class="hidden-sm col-md-6">
+                                                <h4 class="translate" style="text-align: center;">cpu.currentLoad</h4>
+                                                <div id="cpu-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">CPU temperature</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_cpu_temperature"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">CPU current speed</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_cpu_currentSpeed"></dl>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- MEMORY -->
+                            <div id="sys_info_tab_memory" class="tab-pane fade">
+                                <h3 class="translate">Memory</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Memory information</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <dl class="dl-horizontal dl-lg" id="sys_info_memory_info"></dl>
+                                            </div>
+                                            <div class="hidden-sm col-md-6">
+                                                <h4 class="translate" style="text-align: center;">memory.active</h4>
+                                                <div id="memory-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Memory layout</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_memory_memLayout"></dl>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- GRAPHICS -->
+                            <div id="sys_info_tab_graphics" class="tab-pane fade">
+                                <h3 class="translate">Graphics</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Graphics controllers</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_graphics_controllers"></div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Monitor/display</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_graphics_displays"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- DOCKER -->
+                            <div id="sys_info_tab_docker" class="tab-pane fade">
+                                <h3 class="translate">Docker</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">General docker info</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_docker_info"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Containers</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_docker_containers"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Images</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_docker_images"></dl>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Volumes</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_docker_volumes"></dl>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- NETWORK -->
+                            <div id="sys_info_tab_network" class="tab-pane fade">
+                                <h3 class="translate">Network</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Network interfaces</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_network_interfaces"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- WIFI -->
+                            <div id="sys_info_tab_wifi" class="tab-pane fade">
+                                <h3 class="translate">Wifi</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Wifi interfaces</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_wifi_interfaces"></div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Wifi connections</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_wifi_connections"></div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Wifi networks</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_wifi_networks"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- DISKS -->
+                            <div id="sys_info_tab_disks" class="tab-pane fade">
+                                <h3 class="translate">Disks</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Disks, partitions, raids and roms</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_disks_blockDevices"></div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Physical disk layout</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_disks_diskLayout"></div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Mounted file systems</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_disks_fsSize"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- USB -->
+                            <div id="sys_info_tab_usb" class="tab-pane fade">
+                                <h3 class="translate">USB</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">USB Devices</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_usb"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- BLUETOOTH -->
+                            <div id="sys_info_tab_bluetooth" class="tab-pane fade">
+                                <h3 class="translate">Bluetooth</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Detected Bluetooth Devices</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_bluetooth"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- BATTERY -->
+                            <div id="sys_info_tab_battery" class="tab-pane fade">
+                                <h3 class="translate">Battery</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Battery information</div>
+                                    <div class="panel-body">
+                                        <dl class="dl-horizontal dl-lg" id="sys_info_battery"></dl>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- AUDIO -->
+                            <div id="sys_info_tab_audio" class="tab-pane fade">
+                                <h3 class="translate">Audio</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Detected Audio Devices</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_audio"></div>
+                                   </div>
+                                </div>
+
+                            </div>
+
+                            <!-- PRINTER -->
+                            <div id="sys_info_tab_printer" class="tab-pane fade">
+                                <h3 class="translate">Printer</h3>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading translate">Detected Printers</div>
+                                    <div class="panel-body">
+                                        <div id="sys_info_printer"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default translate" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Systemdetails -->
+
+        <!-- Calendar -->
+         <div id="modal-calendar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-calendar" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <iframe style="width: 100%; height: 500px;" src="https://calendar.google.com/calendar/embed?src=mh14bh7m2bdva7pb7tkirsbcsg%40group.calendar.google.com&ctz=Europe%2FBerlin&mode=AGENDA" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <!-- / Calendar -->
+
+    </body>
+</html>

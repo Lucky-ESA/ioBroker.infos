@@ -1,0 +1,483 @@
+{
+    "i18n": true,
+    "type": "tabs",
+    "tabsStyle": {
+        "width": "calc(100% - 100px)"
+    },
+    "items": {
+        "tab1": {
+            "type": "panel",
+            "label": "View",
+            "items": {
+                "_headerAdapter": {
+                    "type": "header",
+                    "text": "View",
+                    "size": 2
+                },
+                "clock": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide clock",
+                    "default": false
+                },
+                "hide_events": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide events",
+                    "default": false
+                },
+                "adapter_request": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Show adapter requests",
+                    "default": false
+                },
+                "adapter_request_close_hidden": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide closed adapter requests",
+                    "default": false
+                },
+                "adapter_request_closed": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Show adapter requests closed at startup",
+                    "default": false
+                }
+            }
+        },
+        "tab2": {
+            "type": "panel",
+            "label": "Documentation",
+            "items": {
+                "_headerAlexa": {
+                    "type": "header",
+                    "text": "Documentation",
+                    "size": 2
+                },
+                "news": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Show ioBroker news",
+                    "default": false
+                },
+                "forum": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Show forum news",
+                    "default": false
+                },
+                "feednami": {
+                    "type": "password",
+                    "newLine": true,
+                    "repeat": false,
+                    "visible": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Feednami API Key"
+                },
+                "staticLink1": {
+                    "type": "staticLink",
+                    "text": "To read news or forum, you need a free API Key if your ioBroker installation can be reached via a hostname, such as iobroker: 8081 or something similar. For IP access it is not needed.",
+                    "href": "https://toolkit.sekando.com/docs/en/setup/hostnames",
+                    "label": "Click here to register",
+                    "icon": "info",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "documentation": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "documentations",
+                    "default": false
+                },
+                "doc_langs": {
+                    "type": "select",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "default": "de",
+                    "options": [
+                        {
+                            "label": "Select the desired languages for the documentations",
+                            "value": "en"
+                        },
+                        {
+                            "label": "German",
+                            "value": "de"
+                        },
+                        {
+                            "label": "English",
+                            "value": "en"
+                        },
+                        {
+                            "label": "Spanish",
+                            "value": "es"
+                        },
+                        {
+                            "label": "French",
+                            "value": "fr"
+                        },
+                        {
+                            "label": "Remote",
+                            "value": "Remote"
+                        },
+                        {
+                            "label": "Italian",
+                            "value": "it"
+                        },
+                        {
+                            "label": "Dutch",
+                            "value": "nl"
+                        },
+                        {
+                            "label": "Polish",
+                            "value": "Remote"
+                        },
+                        {
+                            "label": "Remote",
+                            "value": "pl"
+                        },
+                        {
+                            "label": "Portuguese",
+                            "value": "pt"
+                        },
+                        {
+                            "label": "Russian",
+                            "value": "ru"
+                        },
+                        {
+                            "label": "Ukraine",
+                            "value": "uk"
+                        },
+                        {
+                            "label": "Chinese",
+                            "value": "zh-cn"
+                        }
+                    ],
+                    "label": "Documentation languages"
+                }
+            }
+        },
+        "tab3": {
+            "type": "panel",
+            "label": "Github",
+            "hidden": "false",
+            "items": {
+                "_headerAlexa": {
+                    "type": "header",
+                    "text": "Github",
+                    "size": 2
+                },
+                "github_token": {
+                    "type": "password",
+                    "newLine": true,
+                    "repeat": false,
+                    "visible": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "GitHub personal access token"
+                },
+                "staticLink1": {
+                    "type": "staticLink",
+                    "text": "To create messages about adapters or adapter requests, you need a Github account and a token with repo access.",
+                    "href": "https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line",
+                    "label": "How to generate a token",
+                    "icon": "info",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "hide_github_myIssues": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide my issues button",
+                    "default": false
+                },
+                "hide_github_myWatched": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide watched repos button",
+                    "default": false
+                },
+                "hide_github_myStarred": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide starred repos button",
+                    "default": false
+                },
+                "hide_github_myAssigned": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Hide assigned issues button",
+                    "default": false
+                },
+                "new_adapters": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Search for new adapters",
+                    "help": "only for experts",
+                    "default": false
+                },
+                "new_adapters_sort": {
+                    "type": "select",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "default": "de",
+                    "options": [
+                        {
+                            "label": "name",
+                            "value": "name"
+                        },
+                        {
+                            "label": "creation date",
+                            "value": "create"
+                        },
+                        {
+                            "label": "last update",
+                            "value": "update"
+                        }
+                    ],
+                    "label": "Sort adapters by"
+                },
+                "new_adapters_order": {
+                    "type": "checkbox",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "reverse order",
+                    "default": false
+                },
+                "new_adapters_closed": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "New adapters closed at startup",
+                    "default": false
+                }
+            }
+        },
+        "tab4": {
+            "type": "panel",
+            "label": "System",
+            "items": {
+                "_headerNode": {
+                    "type": "header",
+                    "text": "System",
+                    "size": 2
+                },
+                "noCurrentSysData": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Don't load current system data",
+                    "default": false
+                },
+                "infoLast": {
+                    "type": "staticText",
+                    "text": "Calling up current system data at too short intervals can lead to very high CPU consumption, especially under Windows. To switch off individual queries, set the slider to 0.",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 6,
+                    "xl": 6
+                },
+                "cpuSpeed": {
+                    "type": "slider",
+                    "label": "Load CPU data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "memSpeed": {
+                    "type": "slider",
+                    "label": "Load memory data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "diskSpeed": {
+                    "type": "slider",
+                    "label": "Load disk data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "batterySpeed": {
+                    "type": "slider",
+                    "label": "Load battery data every x seconds",
+                    "newLine": true,
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "networkSpeed": {
+                    "type": "slider",
+                    "label": "Load network data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "allProcessesUsers": {
+                    "type": "slider",
+                    "label": "Load process and user data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "wifiSpeed": {
+                    "type": "slider",
+                    "label": "Load wifi data every x seconds",
+                    "newLine": true,
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "usbSpeed": {
+                    "type": "slider",
+                    "label": "Load usb data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "bluetoothSpeed": {
+                    "type": "slider",
+                    "label": "Load bluetooth data every x seconds",
+                    "min": 0,
+                    "max": 240,
+                    "step": 1,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                }
+            }
+        }
+    }
+}

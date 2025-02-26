@@ -1,0 +1,1423 @@
+{
+    "common": {
+        "name": "infos",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "uk": "Початкова версія",
+                "zh-cn": "首次出版"
+            }
+        },
+        "titleLang": {
+            "en": "INFOS",
+            "de": "Infos",
+            "ru": "Инфос",
+            "pt": "Infos",
+            "nl": "Info's",
+            "fr": "Infos",
+            "it": "Infos",
+            "es": "Infos",
+            "pl": "Infos",
+            "uk": "Інфос",
+            "zh-cn": "信息"
+        },
+        "desc": {
+            "en": "This is an ioBroker adapter to get informations about your system and some news about ioBroker.",
+            "de": "Dies ist ein IOBROKER -Adapter, um Informationen über Ihr System und einige Neuigkeiten über IOBROKER zu erhalten.",
+            "ru": "Это адаптер iobroker, чтобы получить информацию о вашей системе и некоторые новости о iobroker.",
+            "pt": "Este é um adaptador do iobroker para obter informações sobre seu sistema e algumas notícias sobre o iobroker.",
+            "nl": "Dit is een iobroker -adapter om informatie te krijgen over uw systeem en wat nieuws over iOBROKER.",
+            "fr": "Il s'agit d'un adaptateur IOBroker pour obtenir des informations sur votre système et quelques nouvelles sur IOBRoker.",
+            "it": "Questo è un adattatore IoBroker per ottenere informazioni sul tuo sistema e alcune notizie su IoBroker.",
+            "es": "Este es un adaptador Iobroker para obtener información sobre su sistema y algunas noticias sobre Iobroker.",
+            "pl": "Jest to adapter IOBRoker, który otrzymuje informacje o twoim systemie i kilka wiadomości o IOBRAKER.",
+            "uk": "Це адаптер iObroker, щоб отримати інформацію про вашу систему та деякі новини про iObroker.",
+            "zh-cn": "这是一个iObroker适配器，可以获取有关您的系统和有关iObroker的一些新闻的信息。"
+        },
+        "authors": ["Lucky-ESA <github@luckyskills.de>"],
+        "keywords": ["info", "information", "system", "github", "adapters", "updates", "news", "forum"],
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        },
+        "platform": "Javascript/Node.js",
+        "icon": "infos.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/Lucky-ESA/ioBroker.infos/main/admin/infos.png",
+        "readme": "https://github.com/Lucky-ESA/ioBroker.infos/blob/main/README.md",
+        "loglevel": "info",
+        "tier": 3,
+        "mode": "daemon",
+        "type": "misc-data",
+        "messagebox": true,
+        "singleton": true,
+        "materializeTab": true,
+        "compact": true,
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "docs": {
+            "en": "docs/en/info.md",
+            "de": "docs/de/info.md",
+            "ru": "docs/ru/info.md",
+            "pt": "docs/pt/info.md",
+            "nl": "docs/nl/info.md",
+            "fr": "docs/fr/info.md",
+            "it": "docs/it/info.md",
+            "es": "docs/es/info.md",
+            "pl": "docs/pl/info.md",
+            "uk": "docs/uk/info.md",
+            "zh-cn": "docs/zh-cn/info.md"
+        },
+        "adminTab": {
+            "singleton": true,
+            "name": {
+                "en": "Info",
+                "de": "Info",
+                "ru": "Информация",
+                "pt": "Informações",
+                "nl": "Info",
+                "fr": "Info",
+                "it": "Informazioni",
+                "es": "Informacion",
+                "pl": "Informacje",
+                "zh-cn": "信息"
+            },
+            "link": "",
+            "fa-icon": "info"
+        },
+        "restartAdapters": ["vis", "vis-2"],
+        "adminUI": {
+            "config": "json"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=6.0.11"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": "7.0.23"
+            }
+        ]
+    },
+    "native": {
+        "news": true,
+        "forum": true,
+        "clock": true,
+        "hide_events": false,
+        "new_adapters": false,
+        "new_adapters_sort": "name",
+        "new_adapters_order": false,
+        "new_adapters_closed": false,
+        "adapter_request": true,
+        "adapter_request_close_hidden": false,
+        "adapter_request_closed": false,
+        "adapter_issue": true,
+        "adapter_issue_closed": false,
+        "documentation": true,
+        "doc_langs": [],
+        "feednami": "",
+        "noCurrentSysData": true,
+        "cpuSpeed": 0,
+        "memSpeed": 0,
+        "diskSpeed": 0,
+        "batterySpeed": 0,
+        "networkSpeed": 0,
+        "wifiSpeed": 0,
+        "usbSpeed": 0,
+        "bluetoothSpeed": 0,
+        "allProcessesUsers": 0,
+        "github_token": "",
+        "hide_github_myIssues": false,
+        "hide_github_myWatched": false,
+        "hide_github_myStarred": false,
+        "hide_github_myAssigned": false
+    },
+    "encryptedNative": ["feednami", "github_token"],
+    "protectedNative": ["feednami", "github_token"],
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Information",
+                    "de": "Informationen",
+                    "ru": "Информация",
+                    "pt": "Informação",
+                    "nl": "Informatie",
+                    "fr": "Information",
+                    "it": "Informazioni",
+                    "es": "Información",
+                    "pl": "Informacja",
+                    "uk": "Інформація",
+                    "zh-cn": "信息"
+                }
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": {
+                    "en": "Device or service connected",
+                    "de": "Geräte- oder Serviceanschluss",
+                    "ru": "Устройство или сервис подключены",
+                    "pt": "Dispositivo ou serviço conectado",
+                    "nl": "Device of dienst verbonden",
+                    "fr": "Appareil ou service connecté",
+                    "it": "Dispositivo o servizio collegato",
+                    "es": "Dispositivo o servicio conectado",
+                    "pl": "Urządzenie lub usługa połączona",
+                    "uk": "Пристрої або послуги підключені",
+                    "zh-cn": "证人或有关服务"
+                },
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "newsfeed",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "Last Newsfeed",
+                    "de": "Letzter Newsfeed",
+                    "ru": "Последняя лента новостей",
+                    "pt": "Último feed",
+                    "nl": "Laatste nieuwsfeed",
+                    "fr": "Dernier fil d'actualité",
+                    "it": "Last Newsfeed",
+                    "es": "Última noticia",
+                    "pl": "Ostatni kanał wiadomości",
+                    "uk": "Остання стрічка новин",
+                    "zh-cn": "最后的新闻源"
+                },
+                "type": "string",
+                "role": "json",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "last_popup",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "Last popup accepted",
+                    "de": "Letztes Popup erlaubt",
+                    "ru": "Последнее всплывающее окно принято",
+                    "pt": "Último pop-up aceito",
+                    "nl": "Laatste pop-up geaccepteerd",
+                    "fr": "Dernier popup accepté",
+                    "it": "Ultimo popup accettato",
+                    "es": "Última ventana aceptada",
+                    "pl": "Ostatnie wyskakujące okienko zaakceptowane",
+                    "uk": "Останнє спливаюче вікно прийнято",
+                    "zh-cn": "上次弹出窗口已被接受"
+                },
+                "type": "string",
+                "role": "date",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "newsfeed_filtered",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "Last Newsfeed - filtered",
+                    "de": "Letzter Newsfeed — gefiltert",
+                    "ru": "Последняя лента новостей - отфильтрована",
+                    "pt": "Último feed - filtrado",
+                    "nl": "Laatste nieuwsfeed - gefilterd",
+                    "fr": "Dernier fil d'actualité filtré",
+                    "it": "Last Newsfeed - filtrato",
+                    "es": "Last Newsfeed: filtrado",
+                    "pl": "Ostatni kanał wiadomości - filtrowany",
+                    "uk": "Остання стрічка новин - відфільтровано",
+                    "zh-cn": "最新新闻源-已过滤"
+                },
+                "type": "string",
+                "role": "json",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "ignored_news",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "News already read",
+                    "de": "Schon gelesene News",
+                    "ru": "Новости уже прочитаны",
+                    "pt": "Notícia já lida",
+                    "nl": "Het nieuws is al gelezen",
+                    "fr": "News déjà lues",
+                    "it": "News già lette",
+                    "es": "Noticias ya leídas",
+                    "pl": "Wiadomości już przeczytane",
+                    "uk": "Новини вже прочитані",
+                    "zh-cn": "新闻已经看完了"
+                },
+                "type": "string",
+                "role": "json",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "uuid",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "UUID",
+                    "de": "UUID",
+                    "ru": "UUID",
+                    "pt": "UUID",
+                    "nl": "VLOEISTOF",
+                    "fr": "UUID",
+                    "it": "UUID",
+                    "es": "UUID",
+                    "pl": "UUID",
+                    "uk": "УЇД",
+                    "zh-cn": "UUID"
+                },
+                "type": "string",
+                "role": "json",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "readTestFile",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "Read test file for development",
+                    "de": "Entwicklungstestdatei lesen",
+                    "ru": "Прочитайте тестовый файл для разработки",
+                    "pt": "Leia o teste de desenvolvimento",
+                    "nl": "Lees het testbestand voor ontwikkeling",
+                    "fr": "Lire le fichier de test à développer",
+                    "it": "Leggi il test di sviluppo",
+                    "es": "Lea el archivo de prueba de desarrollo",
+                    "pl": "Przeczytaj plik testowy do opracowania",
+                    "uk": "Прочитайте тестовий файл для розробки",
+                    "zh-cn": "读取用于开发的测试文件"
+                },
+                "type": "string",
+                "read": true,
+                "write": true,
+                "def": ""
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo",
+            "type": "device",
+            "common": {
+                "name": {
+                    "en": "System information",
+                    "de": "Systemdaten",
+                    "ru": "Сведения о системе",
+                    "pt": "Dados do sistema",
+                    "nl": "Informatie over het systeem",
+                    "fr": "Informations système",
+                    "it": "Dati di sistema",
+                    "es": "Datos del sistema",
+                    "pl": "Informacje o systemie",
+                    "uk": "Інформація про систему",
+                    "zh-cn": "系统信息"
+                }
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.system",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "System",
+                    "de": "System",
+                    "ru": "система",
+                    "pt": "Sistema",
+                    "nl": "Systeem",
+                    "fr": "Système",
+                    "it": "Sistema",
+                    "es": "Sistema",
+                    "pl": "System",
+                    "uk": "Система",
+                    "zh-cn": "系统"
+                },
+                "role": "info",
+                "icon": "lib/img/icons/system.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.system.hardware",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Hardware info",
+                    "de": "Geräteinfo",
+                    "ru": "Информация об оборудовании",
+                    "pt": "Info hardware",
+                    "nl": "Hardware-informatie",
+                    "fr": "Infos sur le matériel",
+                    "it": "Info hardware",
+                    "es": "Información de hardware",
+                    "pl": "Informacje o sprzęcie",
+                    "uk": "Інформація про обладнання",
+                    "zh-cn": "硬件信息"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.system.uuid",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "UUIDs",
+                    "de": "UUIDs",
+                    "ru": "UUID",
+                    "pt": "UIDs",
+                    "nl": "UUID's",
+                    "fr": "UUID",
+                    "it": "UUID",
+                    "es": "UUID",
+                    "pl": "UUID",
+                    "uk": "UUID",
+                    "zh-cn": "UUID"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.system.bios",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "BIOS",
+                    "de": "BIOS",
+                    "ru": "БИОС",
+                    "pt": "BIOS",
+                    "nl": "BIOGRAFIEËN",
+                    "fr": "BIOGRAPHIES",
+                    "it": "BIOS",
+                    "es": "BIOGRAFIA",
+                    "pl": "BIOS",
+                    "uk": "BIOS",
+                    "zh-cn": "基本输入输出系统"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.system.baseboard",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "BaseBorad",
+                    "de": "Basisbord",
+                    "ru": "Базеборд",
+                    "pt": "Rodapé",
+                    "nl": "Baseboard",
+                    "fr": "BaseBoard",
+                    "it": "BaseboD",
+                    "es": "Básbol",
+                    "pl": "BaseBorad",
+                    "uk": "БейсБорад",
+                    "zh-cn": "BaseBoard"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.system.chassis",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Chassis",
+                    "de": "Fahrgestell",
+                    "ru": "Шасси",
+                    "pt": "Chassi",
+                    "nl": "Onderstel",
+                    "fr": "Châssis",
+                    "it": "Telaio",
+                    "es": "Chasis",
+                    "pl": "Podwozie",
+                    "uk": "Шасі",
+                    "zh-cn": "底盘"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "CPU",
+                    "de": "CPU",
+                    "ru": "ЦПУ",
+                    "pt": "CPU",
+                    "nl": "CPU",
+                    "fr": "CPU",
+                    "it": "CUP",
+                    "es": "CPU",
+                    "pl": "PROCESOR",
+                    "uk": "ЦП",
+                    "zh-cn": "中央处理器"
+                },
+                "role": "info",
+                "icon": "lib/img/icons/cpu.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.info",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "CPU information",
+                    "de": "CPU-Daten",
+                    "ru": "Информация о процессоре",
+                    "pt": "Dados da CPU",
+                    "nl": "CPU-informatie",
+                    "fr": "Informations sur le CPU",
+                    "it": "Dati sulla CPU",
+                    "es": "Datos de la CPU",
+                    "pl": "Informacje o procesorze",
+                    "uk": "Інформація про процесор",
+                    "zh-cn": "CPU 信息"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Currently CPU load",
+                    "de": "Aktuell CPU-Last",
+                    "ru": "Текущая нагрузка на процессор",
+                    "pt": "Carga atual da CPU",
+                    "nl": "Momenteel wordt de CPU belast",
+                    "fr": "Charge CPU actuelle",
+                    "it": "Carico CPU attuale",
+                    "es": "Carga actual de CPU",
+                    "pl": "Aktualne obciążenie procesora",
+                    "uk": "В даний час завантаження процесора",
+                    "zh-cn": "当前 CPU 负载"
+                },
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.avgLoad",
+            "type": "state",
+            "common": {
+                "name": "CPU average load",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoad",
+            "type": "state",
+            "common": {
+                "name": "CPU load in %",
+                "type": "number",
+                "role": "value",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoad_hist",
+            "type": "state",
+            "common": {
+                "name": "CPU load (last 30)",
+                "type": "array",
+                "role": "list",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoadUser",
+            "type": "state",
+            "common": {
+                "name": "CPU load user in %",
+                "type": "number",
+                "role": "value",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoadSystem",
+            "type": "state",
+            "common": {
+                "name": "CPU load system in %",
+                "type": "number",
+                "role": "value",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoadNice",
+            "type": "state",
+            "common": {
+                "name": "CPU load nice in %",
+                "type": "number",
+                "role": "value",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoadIdle",
+            "type": "state",
+            "common": {
+                "name": "CPU load idle in %",
+                "type": "number",
+                "role": "value",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.currentLoadIrq",
+            "type": "state",
+            "common": {
+                "name": "CPU load irq in %",
+                "type": "number",
+                "role": "value",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.rawCurrentLoad",
+            "type": "state",
+            "common": {
+                "name": "CPU load raw values",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.rawCurrentLoadUser",
+            "type": "state",
+            "common": {
+                "name": "CPU load user raw values",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.rawCurrentLoadSystem",
+            "type": "state",
+            "common": {
+                "name": "CPU load system raw values",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.rawCurrentLoadNice",
+            "type": "state",
+            "common": {
+                "name": "CPU load nice raw values",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.rawCurrentLoadIdle",
+            "type": "state",
+            "common": {
+                "name": "CPU load idle raw values",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentLoad.rawCurrentLoadIrq",
+            "type": "state",
+            "common": {
+                "name": "CPU load irq raw values",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.temperature",
+            "type": "channel",
+            "common": {
+                "name": "CPU temperature",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.temperature.main",
+            "type": "state",
+            "common": {
+                "name": "Main temperature (avg)",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.temperature.main_hist",
+            "type": "state",
+            "common": {
+                "name": "Temperature (last 30)",
+                "type": "array",
+                "role": "list",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.temperature.cores",
+            "type": "state",
+            "common": {
+                "name": "CPU temperature/core",
+                "type": "array",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.temperature.max",
+            "type": "state",
+            "common": {
+                "name": "CPU max temperature",
+                "type": "number",
+                "unit": "°C",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentSpeed",
+            "type": "channel",
+            "common": {
+                "name": "CPU currentSpeed",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentSpeed.avgSpeed",
+            "type": "state",
+            "common": {
+                "name": "avg CPU speed (all cores)",
+                "type": "number",
+                "unit": "GHz",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentSpeed.maxSpeed",
+            "type": "state",
+            "common": {
+                "name": "max CPU speed (all cores)",
+                "type": "number",
+                "unit": "GHz",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentSpeed.minSpeed",
+            "type": "state",
+            "common": {
+                "name": "min CPU speed (all cores)",
+                "type": "number",
+                "unit": "GHz",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.cpu.currentSpeed.coresSpeed",
+            "type": "state",
+            "common": {
+                "name": "CPU speed per core",
+                "type": "array",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory",
+            "type": "channel",
+            "common": {
+                "name": "Memory",
+                "role": "info",
+                "icon": "lib/img/icons/memory.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info",
+            "type": "channel",
+            "common": {
+                "name": "Memory information",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.free",
+            "type": "state",
+            "common": {
+                "name": "Memory free",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.used",
+            "type": "state",
+            "common": {
+                "name": "Memory used",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.used_hist",
+            "type": "state",
+            "common": {
+                "name": "Memory used (last 30)",
+                "type": "array",
+                "role": "list",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.active",
+            "type": "state",
+            "common": {
+                "name": "Memory active",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.available",
+            "type": "state",
+            "common": {
+                "name": "Memory available",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.buffcache",
+            "type": "state",
+            "common": {
+                "name": "Memory buffcache",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.swapused",
+            "type": "state",
+            "common": {
+                "name": "Memory swap used",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.memory.info.swapfree",
+            "type": "state",
+            "common": {
+                "name": "Memory swap free",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os",
+            "type": "channel",
+            "common": {
+                "name": "OS",
+                "role": "info",
+                "icon": "lib/img/icons/os.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.info",
+            "type": "channel",
+            "common": {
+                "name": "OS informations",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.versions",
+            "type": "channel",
+            "common": {
+                "name": "Software versions",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.users",
+            "type": "state",
+            "common": {
+                "name": "Users online",
+                "type": "string",
+                "role": "json",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes",
+            "type": "channel",
+            "common": {
+                "name": "Running processes",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes.all",
+            "type": "state",
+            "common": {
+                "name": "# running processes",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes.running",
+            "type": "state",
+            "common": {
+                "name": "# of all processes running",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes.blocked",
+            "type": "state",
+            "common": {
+                "name": "# of all processes blocked",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes.sleeping",
+            "type": "state",
+            "common": {
+                "name": "# of all processes sleeping",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes.unknown",
+            "type": "state",
+            "common": {
+                "name": "# of all processes unknown status",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.os.processes.list",
+            "type": "state",
+            "common": {
+                "name": "All processes incl. details",
+                "type": "string",
+                "role": "json",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.disks",
+            "type": "channel",
+            "common": {
+                "name": "Disks",
+                "role": "info",
+                "icon": "lib/img/icons/disk.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.disks.blockDevices",
+            "type": "channel",
+            "common": {
+                "name": "Disks data",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.disks.diskLayout",
+            "type": "channel",
+            "common": {
+                "name": "Physical disk layout",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.disks.fsSize",
+            "type": "channel",
+            "common": {
+                "name": "Mounted file systems",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.network",
+            "type": "channel",
+            "common": {
+                "name": "Network",
+                "role": "info",
+                "icon": "lib/img/icons/network.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.network.info",
+            "type": "channel",
+            "common": {
+                "name": "Network informations",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.network.interfaces",
+            "type": "channel",
+            "common": {
+                "name": "Current network stats",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.network.stats",
+            "type": "channel",
+            "common": {
+                "name": "Network interfaces",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery",
+            "type": "channel",
+            "common": {
+                "name": "Battery",
+                "role": "info",
+                "icon": "lib/img/icons/battery.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.hasBattery",
+            "type": "state",
+            "common": {
+                "name": "Battery present",
+                "type": "boolean",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.cycleCount",
+            "type": "state",
+            "common": {
+                "name": "Numbers of recharges",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.isCharging",
+            "type": "state",
+            "common": {
+                "name": "Is charging",
+                "type": "boolean",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.maxCapacity",
+            "type": "state",
+            "common": {
+                "name": "Max capacity",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.currentCapacity",
+            "type": "state",
+            "common": {
+                "name": "Current capacity",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.percent",
+            "type": "state",
+            "common": {
+                "name": "Charging level",
+                "type": "number",
+                "role": "value",
+                "unit": "%",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.timeRemaining",
+            "type": "state",
+            "common": {
+                "name": "Minutes left (if discharging)",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.battery.acConnected",
+            "type": "state",
+            "common": {
+                "name": "AC connected",
+                "type": "boolean",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.graphics",
+            "type": "channel",
+            "common": {
+                "name": "Graphics",
+                "role": "info",
+                "icon": "lib/img/icons/graphics.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.graphics.controllers",
+            "type": "channel",
+            "common": {
+                "name": "Graphics controllers",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.graphics.displays",
+            "type": "channel",
+            "common": {
+                "name": "Monitor/display",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.usb",
+            "type": "channel",
+            "common": {
+                "name": "USB Devices",
+                "role": "info",
+                "icon": "lib/img/icons/usb.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.printer",
+            "type": "channel",
+            "common": {
+                "name": "Printer informations",
+                "role": "info",
+                "icon": "lib/img/icons/printer.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.audio",
+            "type": "channel",
+            "common": {
+                "name": "Audio informations",
+                "role": "info",
+                "icon": "lib/img/icons/audio.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.wifi",
+            "type": "channel",
+            "common": {
+                "name": "Wifi informations",
+                "role": "info",
+                "icon": "lib/img/icons/wifi.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.wifi.interfaces",
+            "type": "channel",
+            "common": {
+                "name": "Wifi interfaces",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.wifi.connections",
+            "type": "channel",
+            "common": {
+                "name": "Wifi connections",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.wifi.networks",
+            "type": "channel",
+            "common": {
+                "name": "Wifi networks",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.bluetooth",
+            "type": "channel",
+            "common": {
+                "name": "Bluetooth informations",
+                "role": "info",
+                "icon": "lib/img/icons/bluetooth.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.docker",
+            "type": "channel",
+            "common": {
+                "name": "Docker informations",
+                "role": "info",
+                "icon": "lib/img/icons/docker.png"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.docker.info",
+            "type": "channel",
+            "common": {
+                "name": "General docker info",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.docker.images",
+            "type": "channel",
+            "common": {
+                "name": "Docker images",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.docker.containers",
+            "type": "channel",
+            "common": {
+                "name": "Docker containers",
+                "role": "info"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sysinfo.docker.volumes",
+            "type": "channel",
+            "common": {
+                "name": "Docker volumes",
+                "role": "info"
+            },
+            "native": {}
+        }
+    ]
+}
