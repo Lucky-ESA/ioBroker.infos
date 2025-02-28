@@ -37,7 +37,6 @@ function getNodeExtrainfo(host) {
 
     let extraInfo = "";
     let color = "green";
-
     if (infoData.nodeOld.indexOf(aktKey) !== -1) {
         extraInfo +=
             " <span style='color: red; font-weight: bold;'>(" +
@@ -64,17 +63,17 @@ function getNodeExtrainfo(host) {
             extraInfo += _("Version %s.x of Node.js is currently not fully supported.", aktKey);
             color = "red";
         }
-        //if (aktKey !== infoData.nodeRecommended) {
-        //    if (!first) {
-        //        extraInfo += " - ";
-        //    } else {
-        //        first = false;
-        //    }
-        //    extraInfo += _("Recommended version") + " " + versionMap[infoData.nodeRecommended];
-        //    if (color === "green" && infoData.nodeAccepted.indexOf(aktKey) === -1) {
-        //        color = "orange";
-        //    }
-        //}
+        if (aktKey !== infoData.nodeRecommended) {
+            if (!first) {
+                extraInfo += " - ";
+            } else {
+                first = false;
+            }
+            extraInfo += _("Recommended version") + " " + versionMap[infoData.nodeRecommended];
+            if (color === "green" && infoData.nodeAccepted.indexOf(aktKey) === -1) {
+                color = "orange";
+            }
+        }
 
         extraInfo += ")";
     }

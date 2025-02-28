@@ -198,16 +198,21 @@ jQuery.fn.progressbar = function (a, b) {
 
 async function readInstanceConfig(callback) {
     if (sessionStorage.getItem("ioBroker.infos.infoData")) {
-        infoData = JSON.parse(sessionStorage.getItem("ioBroker.infos.infoData"));
+        if (infoData.nodeRecommended != "v20") {
+            infoData = await (await fetch("../../files/infos.admin/lib/data/infoData.json")).json();
+            sessionStorage.setItem("ioBroker.infos.infoData", JSON.stringify(infoData));
+        } else {
+            infoData = JSON.parse(sessionStorage.getItem("ioBroker.infos.infoData"));
+        }
     } else {
         try {
             infoData = await (
                 await fetch(
-                    "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.info/master/admin/lib/data/infoData.json",
+                    "https://raw.githubusercontent.com/Lucky-ESA/ioBroker.infos/main/admin/lib/data/infoData.json",
                 )
             ).json();
         } catch (e) {
-            infoData = await (await fetch("../data/infoData.json")).json();
+            infoData = await (await fetch("../../files/infos.admin/lib/data/infoData.json")).json();
         }
         sessionStorage.setItem("ioBroker.infos.infoData", JSON.stringify(infoData));
     }
