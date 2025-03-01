@@ -3,16 +3,16 @@
 
 function startPopupNews() {
     try {
-        socket.emit("subscribe", "infos.0.newsfeed");
+        servConn._socket.emit("subscribe", "infos.0.newsfeed");
 
-        socket.on("stateChange", function (id, obj) {
+        servConn._socket.on("stateChange", function (id, obj) {
             if (id === "infos.0.newsfeed") {
                 newsPopup.showPopup(obj.val);
             }
         });
 
         function loadPopup() {
-            socket.emit("getState", "infos.0.newsfeed", function (err, data) {
+            servConn._socket.emit("getState", "infos.0.newsfeed", function (err, data) {
                 if (!err && data) {
                     newsPopup.showPopup(data.val);
                 }
@@ -123,6 +123,12 @@ const newsPopup = {
         try {
             const messages = JSON.parse(obj);
             const today = new Date().getTime();
+            let ignoredNews = [];
+            servConn._socket.emit("getState", "infos.0.ignored_news", (err, data) => {
+                if (!err && data) {
+                    ignoredNews = JSON.parse(data.val);
+                }
+            });
             if (messages.length > 0) {
                 await asyncForEach(messages, async function (message) {
                     let showIt = true;
@@ -207,7 +213,7 @@ const newsPopup = {
                 });
             }
 
-            socket.emit("setState", "infos.0.newsfeed_filtered", {
+            servConn._socket.emit("setState", "infos.0.newsfeed_filtered", {
                 val: JSON.stringify(messagesToShow),
                 ack: true,
             });
@@ -220,6 +226,12 @@ const newsPopup = {
     showDiv: function (id, title, content, type, icon, appendId, uniqueId) {
         const types = ["info", "success", "warning", "danger"];
         let ignored = false;
+        let ignoredNews = [];
+        servConn._socket.emit("getState", "infos.0.ignored_news", (err, data) => {
+            if (!err && data) {
+                ignoredNews = JSON.parse(data.val);
+            }
+        });
         if (Array.isArray(ignoredNews)) {
             ignored = ignoredNews.includes(uniqueId);
         }
@@ -252,7 +264,7 @@ const newsPopup = {
     },
     getAdaptersAndcheckMessages: function (obj, toSetId, dummy) {
         try {
-            socket.emit(
+            servConn._socket.emit(
                 "getObjectView",
                 "system",
                 "host",
@@ -264,45 +276,51 @@ const newsPopup = {
                             hosts.push(res.rows[i].id.substring("system.host.".length));
                         }
                         const mainHost = res.rows[0].id.substring("system.host.".length);
-                        socket.emit("sendToHost", mainHost, "getInstalled", null, async function (_installed) {
-                            if (_installed === "permissionError") {
-                                console.error('May not read "getInstalled"');
-                                _installed = {};
-                            }
+                        servConn._socket.emit(
+                            "sendToHost",
+                            mainHost,
+                            "getInstalled",
+                            null,
+                            async function (_installed) {
+                                if (_installed === "permissionError") {
+                                    console.error('May not read "getInstalled"');
+                                    _installed = {};
+                                }
 
-                            const curInstalled = _installed || {};
-                            const messages = await newsPopup.checkMessages(obj, curInstalled);
-                            if (messages.length > 0) {
-                                await asyncForEach(messages, async function (message) {
+                                const curInstalled = _installed || {};
+                                const messages = await newsPopup.checkMessages(obj, curInstalled);
+                                if (messages.length > 0) {
+                                    await asyncForEach(messages, async function (message) {
+                                        newsPopup.showDiv(
+                                            message.id,
+                                            message.title,
+                                            message.content,
+                                            message.class,
+                                            "exclamation-triangle",
+                                            toSetId,
+                                            message.id + message.created,
+                                        );
+                                    });
+                                } else if (dummy) {
                                     newsPopup.showDiv(
-                                        message.id,
-                                        message.title,
-                                        message.content,
-                                        message.class,
+                                        "TestID",
+                                        "Nothing to show (DUMMY)",
+                                        "<p>These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.</p>",
+                                        "danger",
                                         "exclamation-triangle",
                                         toSetId,
-                                        message.id + message.created,
                                     );
-                                });
-                            } else if (dummy) {
-                                newsPopup.showDiv(
-                                    "TestID",
-                                    "Nothing to show (DUMMY)",
-                                    "<p>These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.</p>",
-                                    "danger",
-                                    "exclamation-triangle",
-                                    toSetId,
-                                );
-                                newsPopup.showDiv(
-                                    "TestID2",
-                                    "Nothing to show (DUMMY 2)",
-                                    "<p>We're acquainted with the wormhole phenomenon, but this... Is a remarkable piece of bio-electronic engineering by which I see much of the EM spectrum ranging from heat and infrared through radio waves, et cetera, and forgive me if I've said and listened to this a thousand times. This planet's interior heat provides an abundance of geothermal energy. We need to neutralize the homing signal.</p>",
-                                    "success",
-                                    "exclamation-triangle",
-                                    toSetId,
-                                );
-                            }
-                        });
+                                    newsPopup.showDiv(
+                                        "TestID2",
+                                        "Nothing to show (DUMMY 2)",
+                                        "<p>We're acquainted with the wormhole phenomenon, but this... Is a remarkable piece of bio-electronic engineering by which I see much of the EM spectrum ranging from heat and infrared through radio waves, et cetera, and forgive me if I've said and listened to this a thousand times. This planet's interior heat provides an abundance of geothermal energy. We need to neutralize the homing signal.</p>",
+                                        "success",
+                                        "exclamation-triangle",
+                                        toSetId,
+                                    );
+                                }
+                            },
+                        );
                     }
                 },
             );

@@ -25,7 +25,7 @@ vis.binds.infos = {
     version: "0.0.1",
     showVersion: function () {
         if (vis.binds.infos.version) {
-            console.log("Version Info-Adapter-Widget: " + vis.binds.infos.version);
+            console.log("Version Infos-Adapter-Widget: " + vis.binds.infos.version);
             vis.binds.infos.version = null;
         }
     },
