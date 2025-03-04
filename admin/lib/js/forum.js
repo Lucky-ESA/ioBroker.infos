@@ -67,25 +67,25 @@ function startForum() {
         }
     }
 
-    function loadKeyForum() {
-        return new Promise(function (resolve, reject) {
-            if (adapterConfig.feednami.toString().indexOf("aes-192-cbc") !== -1) {
-                socket.emit("sendTo", "infos.0", "key", adapterConfig.feednami, async function (state) {
+    const loadKeyForum = function () {
+        if (adapterConfig.feednami.toString().indexOf("aes-192-cbc") !== -1) {
+            return new Promise(function (resolve, reject) {
+                socket.emit("sendTo", "infos.0", "key", adapterConfig.feednami, function (state) {
                     return state ? resolve(state) : reject(adapterConfig.feednami);
                 });
-            } else {
-                return reject(adapterConfig.github_token);
-            }
-        });
-    }
+            });
+        } else {
+            return adapterConfig.feednami;
+        }
+    };
 
     async function getGermanFeedData(lang) {
         let rssFeedUnordered = [];
         try {
-            const feednami = await loadKeyForum();
+            const feednami_key = await loadKeyForum();
             await asyncForEach(forumRss[lang].feeds, async function (link) {
                 if (adapterConfig.feednami) {
-                    feednami.setPublicApiKey(feednami);
+                    feednami.setPublicApiKey(feednami_key);
                 }
                 const data = await feednami.load(link);
                 if (data && data.entries) {
@@ -122,8 +122,8 @@ function startForum() {
         const link = thread.link;
         const topic = link.substring(0, link.lastIndexOf("/")) + ".rss";
         if (adapterConfig.feednami) {
-            const feednami = await loadKeyForum();
-            feednami.setPublicApiKey(feednami);
+            const feednami_key = await loadKeyForum();
+            feednami.setPublicApiKey(feednami_key);
         }
         const data = await feednami.load(topic);
         if (data && data.entries) {
@@ -135,8 +135,8 @@ function startForum() {
 
     async function getChinaForumData(lang) {
         if (adapterConfig.feednami) {
-            const feednami = await loadKeyForum();
-            feednami.setPublicApiKey(feednami);
+            const feednami_key = await loadKeyForum();
+            feednami.setPublicApiKey(feednami_key);
         }
 
         try {

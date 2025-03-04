@@ -5,15 +5,15 @@ let githubuser = {};
 
 const githubHelper = {
     setToken: async function () {
-        return new Promise(function (resolve, reject) {
-            if (adapterConfig.github_token.toString().indexOf("aes-192-cbc") !== -1) {
+        if (adapterConfig.github_token.toString().indexOf("aes-192-cbc") !== -1) {
+            return new Promise(function (resolve, reject) {
                 socket.emit("sendTo", "infos.0", "token", adapterConfig.github_token, async function (state) {
                     return state ? resolve(state) : reject(adapterConfig.github_token);
                 });
-            } else {
-                return reject(adapterConfig.github_token);
-            }
-        });
+            });
+        } else {
+            return adapterConfig.github_token;
+        }
     },
     getUserdata: async function () {
         githubuser = await githubHelper.getData("https://api.github.com/user", "GET");
