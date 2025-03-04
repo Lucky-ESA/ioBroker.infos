@@ -203,10 +203,89 @@ async function searchAdaptersOnGithub() {
         }
 
         sessionStorage.setItem("ioBroker.infos.stargazers", JSON.stringify(stargazers));
-        addStarsToAdapterIssues();
+        addStarsToAdapterIssues_1();
     }
 
     if (adapterConfig.new_adapters && !sessionStorage.getItem("ioBroker.infos.foundGit")) {
         searchGithubForNewAdapters(adapterConfig.new_adapters_sort, adapterConfig.new_adapters_order, allRepos);
     }
+}
+
+function addStarsToAdapterIssues_1() {
+    socket.emit("sendToHost", hosts[0], "getInstalled", null, function (_installed) {
+        if (_installed === "permissionError") {
+            console.error('May not read "getInstalled"');
+            _installed = {};
+        }
+        const adapters = _installed || {};
+        if (adapters && typeof adapters === "object") {
+            for (const key in adapters) {
+                if (key !== "hosts") {
+                    const adapter = adapters[key];
+                    const full_name = adapter.readme.substring(
+                        adapter.readme.indexOf(".com/") + 5,
+                        adapter.readme.indexOf("/blob/"),
+                    );
+                    const fullNameId = full_name
+                        .replace("/", "ISSUE-ISSUE")
+                        .replace(".", "ISSUE-PUNKT-ISSUE")
+                        .toUpperCase();
+                    const stars = stargazers[fullNameId];
+                    if (stars && $("#starsCounter" + fullNameId).length === 0) {
+                        const button =
+                            "<div class='pull-right'><button type='button' title='" +
+                            (stars.starred ? _("Thanks for the adapter!") : _("I want to thank the developer...")) +
+                            "' data-fullname='" +
+                            full_name +
+                            "' id='reactionBI" +
+                            fullNameId +
+                            "' class='adaptersInstalledReaction btn btn-" +
+                            (stars.starred ? "success" : "default") +
+                            "'><i class='fa fa-thumbs-up fa-lg'></i></button></div>";
+                        const starCounter =
+                            "<span title='" +
+                            _("Total votes") +
+                            "' class='badge" +
+                            (stars.starred ? " badge-success" : "") +
+                            "' id='starsCounter" +
+                            fullNameId +
+                            "'>" +
+                            stars.count +
+                            "</span>";
+                        $("#adapterTitleIssueList" + fullNameId).prepend($(starCounter));
+                        const $content = $("#adapterTitleIssueList" + fullNameId)
+                            .parent()
+                            .parent()
+                            .find(".y_content");
+                        $content.prepend($(button));
+                        $($content.find(".create-issue-adapter-button")[0]).css("margin-left", "44px");
+                        if (stars.starred) {
+                            $("#adapterTitleIssueList" + fullNameId)
+                                .parent()
+                                .css("background-color", "#dff0d8");
+                        }
+                    } else if (stars) {
+                        if (stars.starred) {
+                            $("#reactionBI" + fullNameId)
+                                .addClass("btn-success")
+                                .removeClass("btn-default");
+                            $("#starsCounter" + fullNameId).addClass("badge-success");
+                            $("#adapterTitleIssueList" + fullNameId)
+                                .parent()
+                                .css("background-color", "#dff0d8");
+                        } else {
+                            $("#reactionBI" + fullNameId)
+                                .removeClass("btn-success")
+                                .addClass("btn-default");
+                            $("#starsCounter" + fullNameId).removeClass("badge-success");
+                            $("#adapterTitleIssueList" + fullNameId)
+                                .parent()
+                                .css("background-color", "");
+                        }
+                        $("#starsCounter" + fullNameId).text(stars.count);
+                    }
+                }
+            }
+        }
+    });
 }

@@ -67,12 +67,25 @@ function startForum() {
         }
     }
 
+    function loadKeyForum() {
+        return new Promise(function (resolve, reject) {
+            if (adapterConfig.feednami.toString().indexOf("aes-192-cbc") !== -1) {
+                socket.emit("sendTo", "infos.0", "key", adapterConfig.feednami, async function (state) {
+                    return state ? resolve(state) : reject(adapterConfig.feednami);
+                });
+            } else {
+                return reject(adapterConfig.github_token);
+            }
+        });
+    }
+
     async function getGermanFeedData(lang) {
         let rssFeedUnordered = [];
         try {
+            const feednami = await loadKeyForum();
             await asyncForEach(forumRss[lang].feeds, async function (link) {
                 if (adapterConfig.feednami) {
-                    feednami.setPublicApiKey(adapterConfig.feednami);
+                    feednami.setPublicApiKey(feednami);
                 }
                 const data = await feednami.load(link);
                 if (data && data.entries) {
@@ -109,7 +122,8 @@ function startForum() {
         const link = thread.link;
         const topic = link.substring(0, link.lastIndexOf("/")) + ".rss";
         if (adapterConfig.feednami) {
-            feednami.setPublicApiKey(adapterConfig.feednami);
+            const feednami = await loadKeyForum();
+            feednami.setPublicApiKey(feednami);
         }
         const data = await feednami.load(topic);
         if (data && data.entries) {
@@ -121,7 +135,8 @@ function startForum() {
 
     async function getChinaForumData(lang) {
         if (adapterConfig.feednami) {
-            feednami.setPublicApiKey(adapterConfig.feednami);
+            const feednami = await loadKeyForum();
+            feednami.setPublicApiKey(feednami);
         }
 
         try {

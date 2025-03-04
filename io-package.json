@@ -60,7 +60,6 @@
         "type": "misc-data",
         "messagebox": true,
         "singleton": true,
-        "materializeTab": true,
         "compact": true,
         "connectionType": "cloud",
         "dataSource": "poll",
@@ -96,7 +95,8 @@
         },
         "restartAdapters": ["vis", "vis-2"],
         "adminUI": {
-            "config": "json"
+            "config": "json",
+            "tab": "materialize"
         },
         "dependencies": [
             {

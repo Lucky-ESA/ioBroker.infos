@@ -28,7 +28,7 @@ class Infos extends utils.Adapter {
         this.on("ready", this.onReady.bind(this));
         this.on("stateChange", this.onStateChange.bind(this));
         // this.on("objectChange", this.onObjectChange.bind(this));
-        // this.on("message", this.onMessage.bind(this));
+        this.on("message", this.onMessage.bind(this));
         this.on("unload", this.onUnload.bind(this));
         this.adapterIntervals = {};
         this.knownObjects = {};
@@ -135,23 +135,36 @@ class Infos extends utils.Adapter {
         }
     }
 
-    // If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
-    // /**
-    //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-    //  * Using this method requires "common.messagebox" property to be set to true in io-package.json
-    //  * @param {ioBroker.Message} obj
-    //  */
-    // onMessage(obj) {
-    //     if (typeof obj === "object" && obj.message) {
-    //         if (obj.command === "send") {
-    //             // e.g. send email or pushover or whatever
-    //             this.log.info("send command");
-
-    //             // Send response in callback if required
-    //             if (obj.callback) this.sendTo(obj.from, obj.command, "Message received", obj.callback);
-    //         }
-    //     }
-    // }
+    /**
+     * If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
+     * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
+     * Using this method requires "common.messagebox" property to be set to true in io-package.json
+     *
+     * @param {ioBroker.Message} obj
+     */
+    onMessage(obj) {
+        if (typeof obj === "object" && obj.message) {
+            if (obj.command === "token") {
+                let token = this.config.github_token;
+                if (token != "" && this.config.github_token.toString().indexOf("aes-192-cbc") !== -1) {
+                    token = this.decrypt(this.config.github_token);
+                    this.config.github_token = token;
+                }
+                if (obj.callback) {
+                    this.sendTo(obj.from, obj.command, token, obj.callback);
+                }
+            } else if (obj.command === "key") {
+                let key = this.config.feednami;
+                if (key != "" && this.config.feednami.toString().indexOf("aes-192-cbc") !== -1) {
+                    key = this.decrypt(this.config.feednami);
+                    this.config.feednami = key;
+                }
+                if (obj.callback) {
+                    this.sendTo(obj.from, obj.command, key, obj.callback);
+                }
+            }
+        }
+    }
 
     async checkNews() {
         const newsLink = this.test

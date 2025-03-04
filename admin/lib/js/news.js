@@ -41,9 +41,22 @@ function checkNewsLang() {
     return newsLang;
 }
 
+function loadKeyNews() {
+    return new Promise(function (resolve, reject) {
+        if (adapterConfig.feednami.toString().indexOf("aes-192-cbc") !== -1) {
+            socket.emit("sendTo", "infos.0", "key", adapterConfig.feednami, async function (state) {
+                return state ? resolve(state) : reject(adapterConfig.feednami);
+            });
+        } else {
+            return reject(adapterConfig.github_token);
+        }
+    });
+}
+
 async function readAndWriteNewsData() {
     if (adapterConfig.feednami) {
-        feednami.setPublicApiKey(adapterConfig.feednami);
+        const feednami = await loadKeyNews();
+        feednami.setPublicApiKey(feednami);
     }
     try {
         const rss = await feednami.load("http://www.iobroker.net/blog_" + newsLang + ".xml");

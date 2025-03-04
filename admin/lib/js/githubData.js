@@ -4,6 +4,17 @@
 let githubuser = {};
 
 const githubHelper = {
+    setToken: async function () {
+        return new Promise(function (resolve, reject) {
+            if (adapterConfig.github_token.toString().indexOf("aes-192-cbc") !== -1) {
+                socket.emit("sendTo", "infos.0", "token", adapterConfig.github_token, async function (state) {
+                    return state ? resolve(state) : reject(adapterConfig.github_token);
+                });
+            } else {
+                return reject(adapterConfig.github_token);
+            }
+        });
+    },
     getUserdata: async function () {
         githubuser = await githubHelper.getData("https://api.github.com/user", "GET");
         if (!githubuser) {
@@ -158,6 +169,7 @@ const githubHelper = {
         $("#githublistbody").empty();
     },
     getData: async function (url, methode, body) {
+        const token = await githubHelper.setToken();
         if (body) {
             body = JSON.stringify(body);
         }
@@ -166,7 +178,7 @@ const githubHelper = {
                 await fetch(url, {
                     method: methode,
                     headers: new Headers({
-                        Authorization: "token " + adapterConfig.github_token,
+                        Authorization: "token " + token,
                         Accept: "application/vnd.github.squirrel-girl-preview+json",
                     }),
                     body: body,
@@ -177,19 +189,19 @@ const githubHelper = {
         }
     },
     getDataV4: async function (query) {
+        const token = await githubHelper.setToken();
         return await (
             await fetch("https://api.github.com/graphql", {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json",
-                    Authorization: "bearer " + adapterConfig.github_token,
+                    Authorization: "bearer " + token,
                 }),
                 body: JSON.stringify({ query: query }),
             })
         ).json();
     },
-    getQueryForIssues: function (owner, name, login, isAdapterRequest, cursor, search, onlyOpen) {
-        if (onlyOpen == undefined) onlyOpen = true;
+    getQueryForIssues: function (owner, name, login, isAdapterRequest, cursor, search, onlyOpen = true) {
         let query = search ? getIssuesSearchQL : getIssuesDataQL;
 
         if (search) {
