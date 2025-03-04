@@ -188,7 +188,8 @@ const githubHelper = {
             })
         ).json();
     },
-    getQueryForIssues: function (owner, name, login, isAdapterRequest, cursor, search, onlyOpen = true) {
+    getQueryForIssues: function (owner, name, login, isAdapterRequest, cursor, search, onlyOpen) {
+        if (onlyOpen == undefined) onlyOpen = true;
         let query = search ? getIssuesSearchQL : getIssuesDataQL;
 
         if (search) {
