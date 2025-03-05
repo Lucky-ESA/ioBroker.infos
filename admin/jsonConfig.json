@@ -130,7 +130,7 @@
                     "md": 6,
                     "lg": 4,
                     "xl": 4,
-                    "label": "documentations",
+                    "label": "Show documentations",
                     "default": false
                 },
                 "doc_langs": {
