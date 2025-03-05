@@ -125,7 +125,7 @@ function writeAllIssuesV4(allIssues, id) {
                     .find(".title")
                     .prepend(
                         $(
-                            "<span title='" +
+                            "<span style='color: #fff; font-size: 15px;' title='" +
                                 _("Total votes") +
                                 "' class='badge" +
                                 (issue.reactions.viewerHasReacted ? " badge-success" : "") +
