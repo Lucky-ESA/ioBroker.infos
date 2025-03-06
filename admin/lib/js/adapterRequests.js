@@ -67,7 +67,6 @@ async function getAllIssuesFromAdapter(full_name) {
     allIssues.sort(function (a, b) {
         return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
     });
-
     return allIssues;
 }
 
@@ -115,6 +114,7 @@ function writeAllIssuesV4(allIssues, id) {
             $("#modal-githublist-title").append($("<span>(" + allIssues.length + ")</span>"));
         }
         const now = new Date();
+        allIssues.sort((a, b) => b.node.number - a.node.number);
         allIssues.forEach(function (issueNode) {
             const issue = issueNode.node;
             const $item = $("#forumEntryTemplate").children().clone(true, true);
@@ -266,6 +266,7 @@ function writeAllIssues(allIssues, id) {
             $("#adapterRequestBlockTitle").append($("<span>(" + allIssues.length + ")</span>"));
         }
         const now = new Date();
+        allIssues.sort((a, b) => b.node.number - a.node.number);
         allIssues.forEach(function (issue) {
             const $item = $("#forumEntryTemplate").children().clone(true, true);
             $item.find(".label-success").remove();
