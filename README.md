@@ -5,11 +5,10 @@
 [![NPM version](https://img.shields.io/npm/v/iobroker.infos.svg)](https://www.npmjs.com/package/iobroker.infos)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.infos.svg)](https://www.npmjs.com/package/iobroker.infos)
 ![Number of Installations](https://iobroker.live/badges/infos-installed.svg)
-![Current version in stable repository](https://iobroker.live/badges/infos-stable.svg)
 
 [![NPM](https://nodei.co/npm/iobroker.infos.png?downloads=true)](https://nodei.co/npm/iobroker.infos/)
 
-**Tests:** ![Test and Release](https://github.com/Lucky-ESA/ioBroker.infos/workflows/Test%20and%20Release/badge.svg)
+**Tests:** [![Test and Release](https://github.com/Lucky-ESA/ioBroker.infos/actions/workflows/test-and-release.yml/badge.svg)](https://github.com/Lucky-ESA/ioBroker.infos/actions/workflows/test-and-release.yml)
 
 ## infos adapter for ioBroker
 
