@@ -30,7 +30,7 @@
         "@iobroker/adapter-core": "^3.2.3",
         "axios": "^1.9.0",
         "jshashes": "^1.0.8",
-        "semver": "^7.7.1",
+        "semver": "^7.7.2",
         "systeminformation": "^5.27.1"
     },
     "devDependencies": {
