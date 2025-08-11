@@ -105,6 +105,6 @@
     "languages": ["de", "en", "ru", "pt", "nl", "fr", "it", "es", "pl", "uk", "zh-cn"],
     "nodeOld": ["v0", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v13", "v15", "v16", "v18", "19"],
     "nodeNew": ["v22", "v24"],
-    "nodeAccepted": ["v20", "v22"],
-    "nodeRecommended": "v20"
+    "nodeAccepted": ["v20", "v22", "v24"],
+    "nodeRecommended": "v22"
 }

@@ -198,7 +198,7 @@ jQuery.fn.progressbar = function (a, b) {
 
 async function readInstanceConfig(callback) {
     if (sessionStorage.getItem("ioBroker.infos.infoData")) {
-        if (infoData.nodeRecommended != "v20") {
+        if (infoData.nodeRecommended != "v22") {
             infoData = await (await fetch("../../files/infos.admin/lib/data/infoData.json")).json();
             sessionStorage.setItem("ioBroker.infos.infoData", JSON.stringify(infoData));
         } else {
